@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title> Login</title>
+  <link rel="stylesheet" href="signup.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" href="img/istockphoto-2169022058-1024x1024.jpg" type="image/png" />
+
+</head>
+<body>
+
+<header class="nav">
+  <div class="logo">
+    <span>MyMusic</span>
+    <i class="fa-solid fa-music"></i>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#" onclick="toggle('login')">Login</a></li>
+      <li><a href="#" onclick="toggle('signup')">Sign Up</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Main Container -->
+<div id="container" class="container">
+  <div class="row">
+    <!-- Sign Up -->
+    <div class="col align-items-center flex-col sign-up" id="signup-section">
+      <div class="form-wrapper align-items-center">
+        <div class="form sign-up">
+          <div class="input-group">
+            <i class='bx bxs-user'></i>
+            <input type="text" placeholder="Username">
+          </div>
+          <div class="input-group">
+            <i class='bx bx-mail-send'></i>
+            <input type="email" placeholder="Email">
+          </div>
+          <div class="input-group">
+            <i class='bx bxs-lock-alt'></i>
+            <input type="password" placeholder="Password">
+          </div>
+          <div class="input-group">
+            <i class='bx bxs-lock-alt'></i>
+            <input type="password" placeholder="Confirm password">
+          </div>
+          <button id="signUpBtn">Sign up</button>
+          <p>
+            <span>Already have an account?</span>
+            <b onclick="toggle('login')" class="pointer">Sign in here</b>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sign In -->
+    <div class="col align-items-center flex-col sign-in" id="login-section">
+      <div class="form-wrapper align-items-center">
+        <div class="form sign-in">
+          <div class="input-group">
+            <i class='bx bxs-user'></i>
+            <input type="text" placeholder="Username">
+          </div>
+          <div class="input-group">
+            <i class='bx bxs-lock-alt'></i>
+            <input type="password" placeholder="Password">
+          </div>
+          <button id="signInBtn">Sign in</button>
+          <p><b>Forgot password?</b></p>
+          <p>
+            <span>Don't have an account?</span>
+            <b onclick="toggle('signup')" class="pointer">Sign up here</b>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="row content-row">
+    <div class="col align-items-center flex-col">
+      <div class="text sign-in">
+        <h2>Welcome back to<br> My Music!</h2>
+        <p>Feel the rhythm. Dive into your favorite tunes.</p>
+      </div>
+      <div class="img sign-in"></div>
+    </div>
+
+    <div class="col align-items-center flex-col">
+      <div class="img sign-up"></div>
+      <div class="text sign-up">
+        <h2>Join the Beat <br> Discover<br> New Music.</h2>
+        <p>Create your free account and get instant access to the music world.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div id="socialIcons" class="social-icons">
+    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+  <p>© 2025 My Music. All rights reserved.</p>
+</footer>
+
+
+
+<!-- JavaScript -->
+<script>
+  class TempDB {
+    constructor() {
+      this.users = JSON.parse(localStorage.getItem('users') || '[]');
+    }
+
+    save() {
+      localStorage.setItem('users', JSON.stringify(this.users));
+    }
+
+    addUser(user) {
+      this.users.push(user);
+      this.save();
+    }
+
+    findUserByUsername(username) {
+      return this.users.find(u => u.username === username);
+    }
+
+    validateUser(username, password) {
+      return this.users.find(u => u.username === username && u.password === password);
+    }
+  }
+
+  const db = new TempDB();
+  const container = document.getElementById('container');
+
+  function toggle(section = '') {
+    const socialIcons = document.getElementById('socialIcons'); // عنصر الأيقونات
+
+    if (section === 'signup') {
+      container.classList.add('sign-up');
+      container.classList.remove('sign-in');
+      // تحريك الأيقونات لليسار
+      socialIcons.classList.add('align-left');
+      socialIcons.classList.remove('align-right');
+    } else {
+      container.classList.add('sign-in');
+      container.classList.remove('sign-up');
+      // تحريك الأيقونات لليمين
+      socialIcons.classList.add('align-right');
+      socialIcons.classList.remove('align-left');
+    }
+  }
+
+  window.onload = () => {
+    toggle('login');
+  };
+
+  // تسجيل حساب
+  document.getElementById('signUpBtn').addEventListener('click', () => {
+    const username = document.querySelector('.sign-up input[placeholder="Username"]').value.trim();
+    const email = document.querySelector('.sign-up input[placeholder="Email"]').value.trim();
+    const password = document.querySelector('.sign-up input[placeholder="Password"]').value;
+    const confirmPassword = document.querySelector('.sign-up input[placeholder="Confirm password"]').value;
+
+    if (!username || !email || !password || password !== confirmPassword) {
+      alert('Please fill all fields correctly!');
+      return;
+    }
+
+    if (db.findUserByUsername(username)) {
+      alert('Username already exists!');
+      return;
+    }
+
+    db.addUser({ username, email, password });
+    alert('Account created successfully!');
+    toggle('login');
+  });
+
+  // تسجيل الدخول
+  document.getElementById('signInBtn').addEventListener('click', () => {
+    const username = document.querySelector('.sign-in input[placeholder="Username"]').value.trim();
+    const password = document.querySelector('.sign-in input[placeholder="Password"]').value;
+
+    const user = db.findUserByUsername(username);
+
+    if (!user) {
+      alert('User not found! Please Sign Up first.');
+      toggle('signup');
+      return;
+    }
+
+    if (user.password !== password) {
+      alert('Incorrect password!');
+      return;
+    }
+
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    alert('Login successful!');
+    window.location.href = 'home.html';//
+  });
+</script>
+
+</body>
+</html>
