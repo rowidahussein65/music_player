@@ -3,210 +3,422 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title> Login</title>
+  <title>Web Music Player </title>
   <link rel="stylesheet" href="signup.css">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" href="img/istockphoto-2169022058-1024x1024.jpg" type="image/png" />
-
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+  <!-- Header -->
+  <header class="nav">
+    <div class="logo">
+      <span>MyMusic</span>
+      <i class="fa-solid fa-music"></i>
+    </div>
+    <!-- <div class="menu-toggle" onclick="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </div> -->
+    <nav>
+      <ul>
+        <li><a href="#" onclick="toggle('login')">Login</a></li>
+        <li><a href="#" onclick="toggle('signup')">Sign Up</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<header class="nav">
-  <div class="logo">
-    <span>MyMusic</span>
-    <i class="fa-solid fa-music"></i>
-  </div>
-  <nav>
+  <!-- Side Menu -->
+  <!-- <div id="sideMenu" class="side-menu">
+    <span class="close-btn" onclick="toggleMenu()">&times;</span>
     <ul>
-      <li><a href="#" onclick="toggle('login')">Login</a></li>
-      <li><a href="#" onclick="toggle('signup')">Sign Up</a></li>
+      <li><a href="#" onclick="toggle('login'); toggleMenu()">Login</a></li>
+      <li><a href="#" onclick="toggle('signup'); toggleMenu()">Sign Up</a></li>
     </ul>
-  </nav>
-</header>
+  </div> -->
 
-<!-- Main Container -->
-<div id="container" class="container">
-  <div class="row">
-    <!-- Sign Up -->
-    <div class="col align-items-center flex-col sign-up" id="signup-section">
-      <div class="form-wrapper align-items-center">
-        <div class="form sign-up">
-          <div class="input-group">
-            <i class='bx bxs-user'></i>
-            <input type="text" placeholder="Username">
-          </div>
-          <div class="input-group">
-            <i class='bx bx-mail-send'></i>
-            <input type="email" placeholder="Email">
-          </div>
-          <div class="input-group">
-            <i class='bx bxs-lock-alt'></i>
-            <input type="password" placeholder="Password">
-          </div>
-          <div class="input-group">
-            <i class='bx bxs-lock-alt'></i>
-            <input type="password" placeholder="Confirm password">
-          </div>
-          <button id="signUpBtn">Sign up</button>
-          <p>
-            <span>Already have an account?</span>
-            <b onclick="toggle('login')" class="pointer">Sign in here</b>
-          </p>
+  <!-- Main Container -->
+  <div id="container" class="container">
+    <!-- Content Row -->
+    <div class="row content-row">
+      <!-- Sign In Content -->
+      <div class="col align-items-center flex-col">
+        <div class="text sign-in">
+          <h2>Welcome</h2>
+          <p>Enjoy your favorite music anywhere.</p>
+        </div>
+      </div>
+
+      <!-- Sign Up Content -->
+      <div class="col align-items-center flex-col">
+        <div class="text sign-up">
+          <h2>Join MyMusic</h2>
+          <p>Create an account to start listening.</p>
         </div>
       </div>
     </div>
 
-    <!-- Sign In -->
-    <div class="col align-items-center flex-col sign-in" id="login-section">
-      <div class="form-wrapper align-items-center">
-        <div class="form sign-in">
-          <div class="input-group">
-            <i class='bx bxs-user'></i>
-            <input type="text" placeholder="Username">
+    <!-- Forms Row -->
+    <div class="row">
+      <!-- Sign Up Form -->
+      <div class="col align-items-center flex-col sign-up">
+        <div class="form-wrapper align-items-center">
+          <div class="form sign-up">
+            <div class="input-group">
+              <i class='bx bxs-user'></i>
+              <input type="text" placeholder="Username" id="signupUsername" required minlength="3"/>
+            </div>
+            <div class="input-group">
+              <i class='bx bx-mail-send'></i>
+              <input type="email" placeholder="Email" id="signupEmail" required/>
+            </div>
+            <div class="input-group">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" placeholder="Password" id="signupPassword" required minlength="6"/>
+              <i class="fa-solid fa-eye password-toggle" onclick="togglePasswordVisibility('signupPassword')"></i>
+            </div>
+            <div class="input-group">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" placeholder="Confirm password" id="signupConfirmPassword" required minlength="6"/>
+              <i class="fa-solid fa-eye password-toggle" onclick="togglePasswordVisibility('signupConfirmPassword')"></i>
+            </div>
+            <div class="input-group">
+              <i class="fa-solid fa-key"></i>
+              <input type="text" placeholder="Favorite color (for security)" id="signupQuestion" required/>
+            </div>
+            <div class="password-strength-meter">
+              <div class="strength-bar"></div>
+              <span class="strength-text"></span>
+            </div>
+            <button id="signUpBtn">Sign up</button>
+            <p><span>Already have an account?</span> <b onclick="toggle('login')" class="pointer">Sign in here</b></p>
           </div>
-          <div class="input-group">
-            <i class='bx bxs-lock-alt'></i>
-            <input type="password" placeholder="Password">
+        </div>
+      </div>
+
+      <!-- Sign In Form -->
+      <div class="col align-items-center flex-col sign-in">
+        <div class="form-wrapper align-items-center">
+          <div class="form sign-in">
+            <div class="input-group">
+              <i class='bx bxs-user'></i>
+              <input type="text" placeholder="Username or Email" id="loginUsername" required/>
+            </div>
+            <div class="input-group">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" placeholder="Password" id="loginPassword" required/>
+              <i class="fa-solid fa-eye password-toggle" onclick="togglePasswordVisibility('loginPassword')"></i>
+            </div>
+            <div class="remember-me">
+              <input type="checkbox" id="rememberMe">
+              <label for="rememberMe">Keep me signed in</label>
+            </div>
+            <button id="signInBtn">Sign in</button>
+            <p><a href="index-forget-pass.html" class="forget-password">Forgot password?</a></p>
+            <p><span>Don't have an account?</span> <b onclick="toggle('signup')" class="pointer">Sign up here</b></p>
           </div>
-          <button id="signInBtn">Sign in</button>
-          <p><b>Forgot password?</b></p>
-          <p>
-            <span>Don't have an account?</span>
-            <b onclick="toggle('signup')" class="pointer">Sign up here</b>
-          </p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Content Section -->
-  <div class="row content-row">
-    <div class="col align-items-center flex-col">
-      <div class="text sign-in">
-        <h2>Welcome back to<br> My Music!</h2>
-        <p>Feel the rhythm. Dive into your favorite tunes.</p>
-      </div>
-      <div class="img sign-in"></div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <span>&copy; 2025 MyMusic. All rights reserved.</span>
     </div>
+  </footer>
 
-    <div class="col align-items-center flex-col">
-      <div class="img sign-up"></div>
-      <div class="text sign-up">
-        <h2>Join the Beat <br> Discover<br> New Music.</h2>
-        <p>Create your free account and get instant access to the music world.</p>
-      </div>
-    </div>
-  </div>
-</div>
+  <script>
+    // Improved TempDB class with better error handling
+    class TempDB {
+      constructor() {
+        this.loadUsers();
+      }
 
-<footer class="footer">
-  <div id="socialIcons" class="social-icons">
-    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-  </div>
-  <p>© 2025 My Music. All rights reserved.</p>
-</footer>
+      loadUsers() {
+        try {
+          this.users = JSON.parse(localStorage.getItem('users') || '[]');
+        } catch (error) {
+          console.error('Error loading users:', error);
+          this.users = [];
+        }
+      }
 
+      async hashPassword(password) {
+        try {
+          const encoder = new TextEncoder();
+          const data = encoder.encode(password + 'myMusicSalt');
+          const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+          const hashArray = Array.from(new Uint8Array(hashBuffer));
+          return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        } catch (error) {
+          console.error('Error hashing password:', error);
+          throw new Error('Password hashing failed');
+        }
+      }
 
+      async addUser(user) {
+        try {
+          user.password = await this.hashPassword(user.password);
+          this.users.push(user);
+          localStorage.setItem('users', JSON.stringify(this.users));
+          return true;
+        } catch (error) {
+          console.error('Error adding user:', error);
+          return false;
+        }
+      }
 
-<!-- JavaScript -->
-<script>
-  class TempDB {
-    constructor() {
-      this.users = JSON.parse(localStorage.getItem('users') || '[]');
+      findUserByEmailOrUsername(identifier) {
+        if (!identifier) return null;
+        return this.users.find(u =>
+          (u.username && u.username.toLowerCase() === identifier.toLowerCase()) ||
+          (u.email && u.email.toLowerCase() === identifier.toLowerCase())
+        );
+      }
+
+      async authenticateUser(identifier, password) {
+        try {
+          const user = this.findUserByEmailOrUsername(identifier);
+          if (!user) return null;
+          
+          const hashedPassword = await this.hashPassword(password);
+          return user.password === hashedPassword ? user : null;
+        } catch (error) {
+          console.error('Authentication error:', error);
+          return null;
+        }
+      }
+
+      verifySecurityAnswer(identifier, answer) {
+        const user = this.findUserByEmailOrUsername(identifier);
+        if (user && user.question) {
+          return user.question.toLowerCase() === answer.toLowerCase();
+        }
+        return false;
+      }
+
+      async updatePassword(email, newPassword) {
+        try {
+          const user = this.users.find(u => u.email && u.email.toLowerCase() === email.toLowerCase());
+          if (!user) return false;
+          
+          user.password = await this.hashPassword(newPassword);
+          localStorage.setItem('users', JSON.stringify(this.users));
+          return true;
+        } catch (error) {
+          console.error('Error updating password:', error);
+          return false;
+        }
+      }
     }
 
-    save() {
-      localStorage.setItem('users', JSON.stringify(this.users));
+    const db = new TempDB();
+
+    // Session management functions
+    window.saveResetUser = (email) => {
+      try {
+        sessionStorage.setItem('resetEmail', email);
+        return true;
+      } catch (error) {
+        console.error('Error saving reset user:', error);
+        return false;
+      }
+    };
+
+    window.getResetUser = () => {
+      try {
+        return sessionStorage.getItem('resetEmail');
+      } catch (error) {
+        console.error('Error getting reset user:', error);
+        return null;
+      }
+    };
+
+    window.clearResetUser = () => {
+      try {
+        sessionStorage.removeItem('resetEmail');
+      } catch (error) {
+        console.error('Error clearing reset user:', error);
+      }
+    };
+
+    // UI Functions
+    function toggle(mode) {
+      const container = document.getElementById('container');
+      if (container) {
+        container.classList.remove('sign-in', 'sign-up');
+        container.classList.add(mode === 'login' ? 'sign-in' : 'sign-up');
+      }
     }
 
-    addUser(user) {
-      this.users.push(user);
-      this.save();
+    function toggleMenu() {
+      const menu = document.getElementById('sideMenu');
+      if (menu) {
+        menu.style.right = menu.style.right === '0px' ? '-250px' : '0px';
+      }
     }
 
-    findUserByUsername(username) {
-      return this.users.find(u => u.username === username);
+    function togglePasswordVisibility(fieldId) {
+      const field = document.getElementById(fieldId);
+      if (field) {
+        const icon = field.nextElementSibling;
+        if (field.type === 'password') {
+          field.type = 'text';
+          icon?.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+          field.type = 'password';
+          icon?.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+      }
     }
 
-    validateUser(username, password) {
-      return this.users.find(u => u.username === username && u.password === password);
-    }
-  }
-
-  const db = new TempDB();
-  const container = document.getElementById('container');
-
-  function toggle(section = '') {
-    const socialIcons = document.getElementById('socialIcons'); // عنصر الأيقونات
-
-    if (section === 'signup') {
-      container.classList.add('sign-up');
-      container.classList.remove('sign-in');
-      // تحريك الأيقونات لليسار
-      socialIcons.classList.add('align-left');
-      socialIcons.classList.remove('align-right');
-    } else {
-      container.classList.add('sign-in');
-      container.classList.remove('sign-up');
-      // تحريك الأيقونات لليمين
-      socialIcons.classList.add('align-right');
-      socialIcons.classList.remove('align-left');
-    }
-  }
-
-  window.onload = () => {
-    toggle('login');
-  };
-
-  // تسجيل حساب
-  document.getElementById('signUpBtn').addEventListener('click', () => {
-    const username = document.querySelector('.sign-up input[placeholder="Username"]').value.trim();
-    const email = document.querySelector('.sign-up input[placeholder="Email"]').value.trim();
-    const password = document.querySelector('.sign-up input[placeholder="Password"]').value;
-    const confirmPassword = document.querySelector('.sign-up input[placeholder="Confirm password"]').value;
-
-    if (!username || !email || !password || password !== confirmPassword) {
-      alert('Please fill all fields correctly!');
-      return;
+    function checkPasswordStrength(password) {
+      let strength = 0;
+      
+      // Length check
+      if (password.length >= 8) strength++;
+      if (password.length >= 12) strength++;
+      
+      // Complexity checks
+      if (/[A-Z]/.test(password)) strength++;
+      if (/[0-9]/.test(password)) strength++;
+      if (/[^A-Za-z0-9]/.test(password)) strength++;
+      
+      const strengthLevels = ['Very Weak', 'Weak', 'Medium', 'Strong', 'Very Strong', 'Extremely Strong'];
+      const strengthPercent = Math.min(strength * 20, 100);
+      const colors = ['#ff0000', '#ff5e00', '#ffbb00', '#a4ff00', '#00ff00', '#00cc00'];
+      
+      return {
+        percent: strengthPercent,
+        text: strengthLevels[Math.min(strength, strengthLevels.length - 1)],
+        color: colors[Math.min(strength, colors.length - 1)]
+      };
     }
 
-    if (db.findUserByUsername(username)) {
-      alert('Username already exists!');
-      return;
-    }
+    // Event Listeners
+    document.getElementById('signupPassword')?.addEventListener('input', function() {
+      const password = this.value;
+      const {percent, text, color} = checkPasswordStrength(password);
+      const bar = document.querySelector('.strength-bar');
+      const textEl = document.querySelector('.strength-text');
+      
+      if (bar) bar.style.cssText = `width: ${percent}%; background-color: ${color};`;
+      if (textEl) textEl.textContent = text;
+    });
 
-    db.addUser({ username, email, password });
-    alert('Account created successfully!');
-    toggle('login');
-  });
+    window.addEventListener('load', () => {
+      try {
+        sessionStorage.removeItem('currentUser');
+        const rememberedUser = localStorage.getItem('rememberedUser');
+        if (rememberedUser) {
+          sessionStorage.setItem('currentUser', rememberedUser);
+          window.location.href = 'index1.html';
+        } else {
+          toggle('login');
+        }
+      } catch (error) {
+        console.error('Load error:', error);
+      }
+    });
 
-  // تسجيل الدخول
-  document.getElementById('signInBtn').addEventListener('click', () => {
-    const username = document.querySelector('.sign-in input[placeholder="Username"]').value.trim();
-    const password = document.querySelector('.sign-in input[placeholder="Password"]').value;
+    document.getElementById('signUpBtn')?.addEventListener('click', async () => {
+      try {
+        const username = document.getElementById('signupUsername')?.value.trim() || '';
+        const email = document.getElementById('signupEmail')?.value.trim() || '';
+        const password = document.getElementById('signupPassword')?.value.trim() || '';
+        const confirmPassword = document.getElementById('signupConfirmPassword')?.value.trim() || '';
+        const question = document.getElementById('signupQuestion')?.value.trim() || '';
 
-    const user = db.findUserByUsername(username);
+        // Validation
+        if (!username || !email || !password || !confirmPassword || !question) {
+          Swal.fire('Missing Data', 'Please fill all fields!', 'warning');
+          return;
+        }
 
-    if (!user) {
-      alert('User not found! Please Sign Up first.');
-      toggle('signup');
-      return;
-    }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          Swal.fire('Invalid Email', 'Please enter a valid email address.', 'error');
+          return;
+        }
 
-    if (user.password !== password) {
-      alert('Incorrect password!');
-      return;
-    }
+        if (password.length < 6) {
+          Swal.fire('Weak Password', 'Password must be at least 6 characters.', 'warning');
+          return;
+        }
 
-    localStorage.setItem('currentUser', JSON.stringify(user));
-    alert('Login successful!');
-    window.location.href = 'index1.html';//
-  });
-</script>
+        if (password !== confirmPassword) {
+          Swal.fire('Mismatch', 'Passwords do not match.', 'error');
+          return;
+        }
 
+        if (db.findUserByEmailOrUsername(username) || db.findUserByEmailOrUsername(email)) {
+          Swal.fire('Exists', 'Username or email already registered.', 'warning');
+          return;
+        }
+
+        const newUser = {
+          username,
+          email,
+          password,
+          question: question.toLowerCase()
+        };
+
+        const success = await db.addUser(newUser);
+        if (success) {
+          await Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Account created successfully.',
+            confirmButtonText: 'Go to Login'
+          });
+          toggle('login');
+        } else {
+          throw new Error('Failed to add user');
+        }
+      } catch (error) {
+        console.error('Signup error:', error);
+        Swal.fire('Error', 'An error occurred during registration.', 'error');
+      }
+    });
+
+    document.getElementById('signInBtn')?.addEventListener('click', async () => {
+      try {
+        const username = document.getElementById('loginUsername')?.value.trim() || '';
+        const password = document.getElementById('loginPassword')?.value.trim() || '';
+        const remember = document.getElementById('rememberMe')?.checked || false;
+
+        if (!username || !password) {
+          Swal.fire('Error', 'Please enter both username and password.', 'error');
+          return;
+        }
+
+        const user = await db.authenticateUser(username, password);
+        if (!user) {
+          Swal.fire('Error', 'Incorrect username/email or password.', 'error');
+          return;
+        }
+
+        sessionStorage.setItem('currentUser', JSON.stringify(user));
+        if (remember) {
+          localStorage.setItem('rememberedUser', JSON.stringify(user));
+        } else {
+          localStorage.removeItem('rememberedUser');
+        }
+
+        await Swal.fire({
+          icon: 'success',
+          title: 'Logged in!',
+          timer: 1500,
+          showConfirmButton: false
+        });
+        
+        window.location.href = 'index1.html';
+      } catch (error) {
+        console.error('Login error:', error);
+        Swal.fire('Error', 'An error occurred during login.', 'error');
+      }
+    });
+  </script>
 </body>
 </html>

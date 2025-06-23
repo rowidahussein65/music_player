@@ -5,44 +5,44 @@ const progressBar = document.getElementById('progressBar');
 const currentTimeEl = document.getElementById('currentTime');
 const totalTimeEl = document.getElementById('totalTime');
 
-let songs = [
-  {
-    title: " حفلة تنكرية ",
-    artist: " رحمة محسن",
-    file: "songs/2025 l رحمه محسن & أحمد العوضي - حفلة تنكرية - أغنية الفرح مسلسل فهد البطل.mp3",
-    category: "Shaabi"
-  },
-  {
-    title: "We Redet",
-    artist: "  Amr Diab",
-    file: "songs/Amr Diab  We Redet  عمرو دياب  ورضيت.mp3",
-    category: "Romantic"
-  },
-  {
-    title: "   7ADOTA ALMANY",
-    artist: "  MARWAN MOUSSA",
-    file: "songs/MARWAN MOUSSA - 7ADOTA ALMANY (OFFICIAL AUDIO) مروان موسى - حدوتة الماني.mp3",
-    category: "Mahraganat"
-  },
-  {
-    title: " Rez2y",
-    artist: " Muhab",
-    file: "songs/Muhab - Rez2y I مهاب - رزقي Prod. Evo.mp3",
-    category: "Mahraganat"
-  },
-  {
-    title: "  El Hob Eibna ",
-    artist: "Ramy Sabry ",
-    file: "songs/Ramy Sabry - El Hob Eibna  رامي صبري - الحب عيبنا (مسلسل وتقابل حبيب).mp3",
-    category: "Romantic"
-  },
-  {
-    title: " ملوك البحر",
-    artist: "حودة ناصر",
-    file: "songs/كليب ملوك البحر ( بالمكنه البطة اخدت اللقطة ) حوده ناصر شاعر الغية  توزيع سانتوس [ النسخة الاصلية ].mp3",
-    category: "Mahraganat"
-  }
-];
+// let songs = [
+//   {
+//     title: " حفلة تنكرية ",
+//     artist: " رحمة محسن",
+//     file: "songs/2025 l رحمه محسن & أحمد العوضي - حفلة تنكرية - أغنية الفرح مسلسل فهد البطل.mp3",
+//     category: "Shaabi"
+//   },
+//   {
+//     title: "We Redet",
+//     artist: "  Amr Diab",
+//     file: "songs/Amr Diab  We Redet  عمرو دياب  ورضيت.mp3",
+//     category: "Romantic"
+//   },
+//   {
+//     title: "   7ADOTA ALMANY",
+//     artist: "  MARWAN MOUSSA",
+//     file: "songs/MARWAN MOUSSA - 7ADOTA ALMANY (OFFICIAL AUDIO) مروان موسى - حدوتة الماني.mp3",
+//     category: "Mahraganat"
+//   },
+//   {
+//     title: " Rez2y",
+//     artist: " Muhab",
+//     file: "songs/Muhab - Rez2y I مهاب - رزقي Prod. Evo.mp3",
+//     category: "Mahraganat"
+//   },
+//   {
+//     title: "  El Hob Eibna ",
+//     artist: "Ramy Sabry ",
+//     file: "songs/Ramy Sabry - El Hob Eibna  رامي صبري - الحب عيبنا (مسلسل وتقابل حبيب).mp3",
+//     category: "Romantic"
+//   },
+//   {
+//     title: " ملوك البحر",
+//     artist: "حودة ناصر",
+//     file: "songs/كليب ملوك البحر ( بالمكنه البطة اخدت اللقطة ) حوده ناصر شاعر الغية  توزيع سانتوس [ النسخة الاصلية ].mp3",
+//     category: "Mahraganat"
+//   }
+// ];
 
 let filteredSongs = [...songs];
 let currentIndex = 0;

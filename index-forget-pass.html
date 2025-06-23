@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forgot Password</title>
+  <link rel="icon" href="img/istockphoto-2169022058-1024x1024.jpg" type="image/png" />
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9)), url('img/mohammad-metri-1oKxSKSOowE-unsplash.jpg') center/cover;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .box {
+      background: rgba(0,0,0,0.7);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    input {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border: none;
+      margin: 1rem -2rem;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.7rem 2rem;
+      border: none;
+      border-radius: 0.5rem;
+      background: darkred;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background: #a30000;
+    }
+
+    a {
+      color: #ccc;
+      display: block;
+      margin-top: 1rem;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<div class="box">
+  <h2>Forgot your password?</h2>
+  <p>Enter your username or email address</p>
+  <input type="text" id="userInput" placeholder="Username or Email" />
+
+  <p>Answer your security question</p>
+  <input type="text" id="securityAnswer" placeholder="What’s your favorite color?" />
+
+  <button onclick="recover()">Recover</button>
+  <a href="index.html">Back to Login</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  class TempDB {
+    constructor() {
+      this.users = JSON.parse(localStorage.getItem('users') || '[]');
+    }
+
+    findUserByEmailOrUsername(value) {
+      return this.users.find(user =>
+        user.username.toLowerCase() === value.toLowerCase() ||
+        user.email.toLowerCase() === value.toLowerCase()
+      );
+    }
+  }
+
+  const db = new TempDB();
+
+  window.saveResetUser = email => sessionStorage.setItem('resetEmail', email);
+  window.getResetUser = () => sessionStorage.getItem('resetEmail');
+
+  function recover() {
+    const identifier = document.getElementById('userInput').value.trim().toLowerCase();
+    const answer = document.getElementById('securityAnswer').value.trim().toLowerCase();
+
+    if (!identifier || !answer) {
+      Swal.fire('Missing Info', 'Please enter your email/username and answer.', 'warning');
+      return;
+    }
+
+    const user = db.findUserByEmailOrUsername(identifier);
+
+    if (!user) {
+      Swal.fire('User Not Found', 'We could not find an account with that username or email.', 'error');
+      return;
+    }
+
+    if (user && user.question && user.question.toLowerCase() === answer) {
+      saveResetUser(user.email);
+      Swal.fire({
+        icon: 'success',
+        title: 'Verified!',
+        text: 'Redirecting to password reset...',
+        confirmButtonText: 'Continue'
+      }).then(() => {
+        window.location.href = 'index-reset-password.html';
+      });
+    } else {
+      Swal.fire('Failed', 'Invalid credentials or security answer.', 'error');
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,81 +1,188 @@
+/* ===== Root Variables ===== */
+:root {
+  --primary-color: #49291e;
+  --accent-color: #dd7c15;
+  --coffee-color: #A0522D;
+  --white-color: #F5E8DD;
+  --light-brown: #e6d5cc;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: url('img/mohammad-metri-1oKxSKSOowE-unsplash.jpg') no-repeat center center fixed;
   background-size: cover;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding-top: 90px; /* مساحة إضافية للـ navbar */
+  font-family: 'Arial', sans-serif;
+  padding-top: 90px;
   min-height: 100vh;
-  overflow-y: auto; /* إعادة التمرير الرأسي */
 }
+
 .custom-navbar {
- background-color: rgba(73, 41, 30, 0.221); /* مثال: بني داكن شفاف */
-  color: #fff;
+  background-color: rgba(73, 41, 30, 0.85);
+  color: var(--white-color);
   backdrop-filter: blur(4px);
-  width: 100%;
-  z-index: 1030; /* تأكد من أنها فوق كل شيء */
 }
-
-
 
 .navbar-brand i {
-  color: #E97451;
+  color: var(--accent-color);
+  animation: pulseIcon 1.8s infinite;
+}
+
+@keyframes pulseIcon {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
 }
 
 .btn-outline-light:hover {
-  background-color: #E97451;
-  border-color: #E97451;
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
   color: white;
 }
 
-
+/* ===== Boxes (Spotify & Player) ===== */
+.spotify-box,
 .player-container {
-  background-color: rgba(73, 41, 30, 0.37); /* بني داكن شفاف */
-  color: #fff;
-  width: 100%;
-  max-width: 500px;
-  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: var(--white-color);
+  padding: 25px;
   border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  margin: 60px 30px 60px auto; /* من أعلى، ومن اليمين، ومن الأسفل */
-}   
- 
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  max-width: 480px;
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+}
+
+.spotify-box h2 {
+  font-size: 1.6rem;
+  color: var(--accent-color);
+}
+
+.btn-spotify {
+  background-color: #1DB954;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 10px 20px;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-spotify:hover {
+  background-color: #1aa34a;
+  transform: scale(1.05);
+}
+
 h1 i {
-      color: #D2691E; /* طوبي/نحاسي */
-    }
+  color: var(--accent-color);
+}
 
-    /* أزرار الفلترة */
-    .btn.custom-btn {
-      background-color: #A0522D;
-      color: white;
-      border: none;
-    }
+/* ===== Custom Filter Buttons ===== */
+.btn.custom-btn {
+  background-color: var(--coffee-color);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+}
 
-    .btn.custom-btn:hover {
-      background-color: #8B4513;
-    }
+.btn.custom-btn:hover {
+  background-color: #8B4513;
+  transform: scale(1.05);
+}
 
-    /* أزرار التشغيل */
-    .btn-outline-primary {
-      color: #E97451;
-      border-color: #E97451;
-    }
+/* ===== Audio Player Controls ===== */
+.btn-outline-primary {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+  transition: all 0.3s ease;
+}
 
-    .btn-outline-primary:hover {
-      background-color: #E97451;
-      color: white;
-    }
+.btn-outline-primary:hover {
+  background-color: var(--accent-color);
+  color: white;
+  transform: scale(1.05);
+}
 
-    /* الروابط */
-    a.text-primary {
-      color: #E97451 !important;
-    }
+/* ===== Links and Text ===== */
+a.text-primary {
+  color: var(--accent-color) !important;
+  transition: all 0.3s ease;
+}
 
-    a.text-primary:hover {
-      color: #FF7F50 !important;
-    }
+a.text-primary:hover {
+  color: #FF7F50 !important;
+}
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
-    }
+#nowPlaying {
+  color: white;
+}
 
+.list-group-item.active {
+  background-color: var(--light-brown) !important;
+  border-color: var(--light-brown) !important;
+  color: var(--primary-color) !important;
+}
+
+#progressBar::-webkit-slider-thumb {
+  background-color: var(--light-brown);
+  border-radius: 50%;
+}
+
+/* ===== Footer ===== */
+.footer {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 1rem 0;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.social-icons a {
+  color: var(--white-color);
+  font-size: 1.5rem;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.social-icons a:hover {
+  color: #fdfcfc;
+  transform: scale(1.2);
+}
+
+/* ===== Responsive for Small Screens ===== */
+@media (max-width: 991.98px) {
+  body {
+    padding-top: 0;
+  }
+
+  .spotify-box,
+  .player-container {
+    max-width: 90%;
+    min-height: auto;
+  }
+
+  .player-container {
+    order: 1;
+  }
+
+  .spotify-box {
+    order: 2;
+  }
+}
