@@ -279,7 +279,7 @@ header.nav {
   right: 50%;
 }
 
-/* Footer */
+/* Footer - Will be hidden on small screens */
 .footer {
   position: fixed;
   bottom: 0;
@@ -402,7 +402,6 @@ header.nav {
   .form-wrapper {
       order: 2;
       margin-top: 0;
-      padding: 1rem;
   }
 
   .form {
@@ -415,7 +414,7 @@ header.nav {
       display: flex !important;
       flex-direction: column;
       align-items: center;
-      margin-top: 10%;
+      margin-top: 8%;
   }
 
   .container.sign-in .text.sign-up,
@@ -423,37 +422,9 @@ header.nav {
       display: none !important;
   }
 
+  /* Remove footer completely on small screens */
   .footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.85);
-      padding: 1rem 0;
-      z-index: 10;
-  }
-
-  .footer .footer-content {
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      padding: 0;
-      margin: 0 !important;
-      text-align: center !important;
-  }
-
-  .container.sign-in ~ .footer .footer-content,
-  .container.sign-up ~ .footer .footer-content {
-      align-items: center;
-      text-align: center;
-      padding: 0;
-      margin: 0 !important;
-  }
-
-  .footer-content span {
-      margin: 0;
-      width: 100%;
-      text-align: center;
+      display: none;
   }
 }
 
@@ -487,7 +458,6 @@ header.nav {
       padding-top: 10px;
   }
 
-  /* تعديل إضافي للشاشات الصغيرة جدًا */
   .text {
       padding-top: 30px;
   }
