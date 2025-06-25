@@ -5,35 +5,56 @@
   --coffee-color: #A0522D;
   --white-color: #F5E8DD;
   --light-brown: #e6d5cc;
+  --container-max-width: 1200px;
+  --box-max-width: 480px;
 }
 
 * {
   scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
-html, body {
+html {
   height: 100%;
-  margin: 0;
-  padding: 0;
+  overflow-x: hidden;
 }
 
 body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
   background: url('img/mohammad-metri-1oKxSKSOowE-unsplash.jpg') no-repeat center center fixed;
   background-size: cover;
-  font-family: 'Arial', sans-serif;
-  padding-top: 90px;
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
 }
 
+/* ===== Navigation ===== */
 .custom-navbar {
-  background-color: rgba(73, 41, 30, 0.85);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(73, 41, 30, 0.95);
   color: var(--white-color);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  padding: 0.8rem 1rem;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .navbar-brand i {
   color: var(--accent-color);
-  animation: pulseIcon 1.8s infinite;
+  animation: pulseIcon 1.8s infinite ease-in-out;
+  font-size: 1.5rem;
 }
 
 @keyframes pulseIcon {
@@ -41,171 +62,313 @@ body {
   50% { transform: scale(1.2); }
 }
 
-.btn-outline-light:hover {
-  background-color: var(--accent-color);
-  border-color: var(--accent-color);
-  color: white;
+.navbar-toggler {
+  border-color: var(--white-color);
 }
 
-/* ===== Boxes (Spotify & Player) ===== */
-.spotify-box,
-.player-container {
-  background-color: rgba(0, 0, 0, 0.4);
+/* ===== Main Layout Structure ===== */
+.main-container {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 15px;
+  overflow: hidden;
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: var(--container-max-width);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 15px;
+}
+
+/* ===== Content Boxes ===== */
+.media-box {
+  background-color: rgba(0, 0, 0, 0.45);
   color: var(--white-color);
   padding: 25px;
   border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  max-width: 480px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
   width: 100%;
+  max-width: var(--box-max-width);
   min-height: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.4s ease, box-shadow 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+  position: relative;
 }
 
-.spotify-box h2 {
+.media-box.scrollable {
+  overflow-y: auto;
+}
+
+.media-box-header {
+  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  padding: 10px 0;
+  z-index: 10;
+}
+
+.media-box-header h2 {
   font-size: 1.6rem;
   color: var(--accent-color);
+  margin: 0;
+  padding: 0;
 }
 
+.media-box-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ===== Buttons ===== */
 .btn-spotify {
   background-color: #1DB954;
   color: white;
-  font-weight: bold;
+  font-weight: 600;
   border-radius: 8px;
   padding: 10px 20px;
   border: none;
   transition: all 0.3s ease;
+  text-align: center;
+  display: inline-block;
+  margin: 5px 0;
 }
 
 .btn-spotify:hover {
   background-color: #1aa34a;
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-h1 i {
-  color: var(--accent-color);
-}
-
-/* ===== Custom Filter Buttons ===== */
 .btn.custom-btn {
   background-color: var(--coffee-color);
   color: white;
   border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
   transition: all 0.3s ease;
 }
 
 .btn.custom-btn:hover {
   background-color: #8B4513;
-  transform: scale(1.05);
+  transform: translateY(-2px);
 }
 
-/* ===== Audio Player Controls ===== */
 .btn-outline-primary {
   color: var(--accent-color);
   border-color: var(--accent-color);
+  border-radius: 8px;
   transition: all 0.3s ease;
 }
 
 .btn-outline-primary:hover {
   background-color: var(--accent-color);
   color: white;
-  transform: scale(1.05);
-}
-
-/* ===== Links and Text ===== */
-a.text-primary {
-  color: var(--accent-color) !important;
-  transition: all 0.3s ease;
-}
-
-a.text-primary:hover {
-  color: #FF7F50 !important;
-}
-
-#nowPlaying {
-  color: white;
-}
-
-.list-group-item.active {
-  background-color: var(--light-brown) !important;
-  border-color: var(--light-brown) !important;
-  color: var(--primary-color) !important;
-}
-
-#progressBar::-webkit-slider-thumb {
-  background-color: var(--light-brown);
-  border-radius: 50%;
 }
 
 /* ===== Footer ===== */
 .footer {
   background-color: var(--primary-color);
   color: var(--white-color);
-  padding: 1rem 0;
+  padding: 1.2rem 0;
   width: 100%;
-  margin-top: 40px;
+  margin-top: auto;
+  position: relative;
+  z-index: 100;
 }
 
 .footer-content {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
+.social-icons {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+
 .social-icons a {
   color: var(--white-color);
-  font-size: 1.5rem;
-  transition: color 0.3s, transform 0.3s;
+  font-size: 1.4rem;
+  margin: 0 12px;
+  transition: all 0.3s ease;
+  display: inline-block;
 }
 
 .social-icons a:hover {
-  color: #fdfcfc;
-  transform: scale(1.2);
+  color: var(--accent-color);
+  transform: translateY(-3px);
 }
 
-/* ===== Responsive for Small Screens ===== */
-/* ----------- (عرض أقل من 992px) ----------- */
+/* ===== Responsive Adjustments ===== */
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .content-wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  .media-box {
+    flex: 1;
+    min-height: 550px;
+  }
+}
+
+/* Medium devices (tablets, 768px - 991.98px) */
 @media (max-width: 991.98px) {
   body {
-    padding-top: 0;
+    padding-top: 70px;
   }
-
-  .spotify-box,
-  .player-container {
+  
+  .media-box {
     max-width: 90%;
     min-height: auto;
+    margin-bottom: 25px;
   }
-
-  .player-container {
-    order: 1;
-  }
-
-  .spotify-box {
-    order: 2;
+  
+  .media-box.scrollable {
+    max-height: 60vh;
   }
 }
 
-/* ----------- (Landscape) ----------- */
-@media (max-width: 991.98px) and (orientation: landscape) {
+/* Small devices (landscape phones, 576px - 767.98px) */
+@media (max-width: 767.98px) {
   body {
-    padding-top: 10px; /* تعديل  ليتناسب مع الوضع الأفقي */
+    padding-top: 65px;
   }
-
-  .spotify-box,
-  .player-container {
-    max-width: 80%; 
-    min-height: 60vh; 
-    margin: 0 auto; 
+  
+  .media-box {
+    padding: 20px;
+    max-width: 95%;
   }
+  
+  .navbar-brand {
+    font-size: 0.9rem;
+  }
+}
 
-  @media (max-height: 500px) {
-    .spotify-box,
-    .player-container {
-      min-height: auto;
-      margin-bottom: 10px;
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  body {
+    padding-top: 60px;
+  }
+  
+  .media-box-header h2 {
+    font-size: 1.4rem;
+  }
+  
+  .btn-spotify, .btn.custom-btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .footer {
+    padding: 1rem 0;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) {
+  .media-box.scrollable {
+    max-height: 65vh;
+    overflow-y: auto;
+  }
+  
+  @media (max-height: 600px) {
+    body {
+      padding-top: 60px;
     }
+    
+    .main-container {
+      padding: 10px;
+    }
+    
+    .media-box {
+      min-height: 55vh;
+      margin-bottom: 15px;
+    }
+    
+    .footer {
+      padding: 0.8rem 0;
+    }
+  }
+  
+  @media (max-height: 500px) {
+    .media-box {
+      min-height: 50vh;
+      padding: 15px;
+    }
+    
+    .media-box-header {
+      padding: 5px 0;
+    }
+  }
+}
+
+/* Very small height devices */
+@media (max-height: 400px) {
+  .media-box.scrollable {
+    max-height: 45vh;
+  }
+  
+  .footer {
+    display: none;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c5690d;
+}
+
+/* Print styles */
+@media print {
+  .custom-navbar, .footer {
+    display: none;
+  }
+  
+  body {
+    padding-top: 0;
+    background: none;
+    color: #000;
+  }
+  
+  .media-box {
+    background: none;
+    box-shadow: none;
+    color: #000;
   }
 }
