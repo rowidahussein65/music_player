@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>MY MUSIC</title>
+  <title>Web Music Player</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -59,12 +59,12 @@
           </div>
 
           <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+            <button class="btn custom-btn" onclick="searchTracks('all')">All</button>
             <button class="btn custom-btn" onclick="searchTracks('pop')">Pop</button>
             <button class="btn custom-btn" onclick="searchTracks('rock')">Rock</button>
             <button class="btn custom-btn" onclick="searchTracks('classical')">Classical</button>
             <!-- <button class="btn custom-btn" onclick="searchTracks('egypt OR masr OR amr diab OR mohamed mounir')">Egyptian</button> -->
             <!-- <button class="btn custom-btn" onclick="searchTracks('arabic OR egypt OR iraq OR saudi OR tunisia')">Arabic</button> -->
-            <button class="btn custom-btn" onclick="searchTracks('all')">All</button>
           </div>
 
           <ul id="playlist" class="list-group mb-3"></ul>
@@ -83,7 +83,7 @@
           <audio id="audioPlayer" controls style="width:100%"></audio>
 
           <div id="userLinks" class="mt-3">
-            <a href="index.html" class="text-primary text-decoration-underline fw-semibold">Create Your Account</a>
+            <!-- <a href="index.html" class="text-primary text-decoration-underline fw-semibold">Create Your Account</a> -->
           </div>
 
           <div id="favoritesContainer" class="mt-4">
@@ -209,7 +209,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
       const username = currentUser?.username || 'User';
-      document.getElementById("welcomeMessage").innerText = `Welcome back, ${username}! 🎶`;
+      document.getElementById("welcomeMessage").innerText = `Welcome , ${username}! 🎶`;
       document.getElementById("welcomeMessage").style.display = 'block';
       document.getElementById("logoutBtn").style.display = "inline-block";
       document.getElementById("logoutBtn").addEventListener('click', () => {

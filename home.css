@@ -167,6 +167,7 @@ a.text-primary:hover {
 }
 
 /* ===== Responsive for Small Screens ===== */
+/* ----------- (عرض أقل من 992px) ----------- */
 @media (max-width: 991.98px) {
   body {
     padding-top: 0;
@@ -184,5 +185,27 @@ a.text-primary:hover {
 
   .spotify-box {
     order: 2;
+  }
+}
+
+/* ----------- (Landscape) ----------- */
+@media (max-width: 991.98px) and (orientation: landscape) {
+  body {
+    padding-top: 10px; /* تعديل  ليتناسب مع الوضع الأفقي */
+  }
+
+  .spotify-box,
+  .player-container {
+    max-width: 80%; 
+    min-height: 60vh; 
+    margin: 0 auto; 
+  }
+
+  @media (max-height: 500px) {
+    .spotify-box,
+    .player-container {
+      min-height: auto;
+      margin-bottom: 10px;
+    }
   }
 }

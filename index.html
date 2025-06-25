@@ -395,7 +395,14 @@
 
         const user = await db.authenticateUser(username, password);
         if (!user) {
-          Swal.fire('Error', 'Incorrect username/email or password.', 'error');
+          // Modified this part to switch to sign-up form after error
+          await Swal.fire({
+            icon: 'error',
+            title: 'Account Not Found',
+            text: 'No account exists with these credentials. Would you like to sign up instead?',
+            confirmButtonText: 'OK'
+          });
+          toggle('signup');
           return;
         }
 

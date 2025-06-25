@@ -332,6 +332,7 @@ header.nav {
 }
 
 /* ========== Responsive Design ========== */
+/* ----------- Mobile (Portrait) - up to 768px ----------- */
 @media only screen and (max-width: 768px) {
   html, body {
     overflow-x: hidden;
@@ -428,6 +429,56 @@ header.nav {
   }
 }
 
+/* ----------- Mobile Landscape - 768px and below ----------- */
+@media only screen and (max-width: 768px) and (orientation: landscape) {
+  .container::before {
+      height: 100%;
+  }
+
+  .row {
+      flex-direction: row;
+      padding-top: 20px;
+      height: 100vh;
+  }
+
+  .content-row {
+      flex: 1;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  }
+
+  .form-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  }
+
+  .container.sign-in .text.sign-in,
+  .container.sign-up .text.sign-up {
+      margin-top: 0;
+      margin-bottom: 20px;
+  }
+
+  .text h2 {
+      font-size: 1.5rem;
+  }
+
+  .text p {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+  }
+
+  /* Adjust form sizing in landscape */
+  .form {
+      max-width: 90%;
+      margin: 0 auto;
+  }
+}
+
+/* ----------- Small Mobile (Portrait) - up to 480px ----------- */
 @media (max-width: 480px) {
   .text h2 {
       font-size: 1.5rem;
@@ -463,6 +514,35 @@ header.nav {
   }
 }
 
+/* ----------- Small Mobile Landscape - 480px and below ----------- */
+@media (max-width: 480px) and (orientation: landscape) {
+  .text h2 {
+      font-size: 1.3rem;
+  }
+  
+  .text p {
+      font-size: 0.8rem;
+  }
+  
+  .form button {
+      padding: 0.6rem 0;
+      font-size: 0.9rem;
+  }
+  
+  .input-group input {
+      padding: 0.6rem 2rem 0.6rem 2rem;
+  }
+
+  .content-row {
+      padding-top: 5px;
+  }
+
+  .text {
+      padding-top: 15px;
+  }
+}
+
+/* ----------- Base Text Styles ----------- */
 /* Hide text initially */
 .text {
   opacity: 0;
