@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Web Music Player </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Web Music Player</title>
   <link rel="stylesheet" href="signup.css">
   <link rel="icon" href="img/istockphoto-2169022058-1024x1024.jpg" type="image/png" />
   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
@@ -17,9 +17,6 @@
       <span>MyMusic</span>
       <i class="fa-solid fa-music"></i>
     </div>
-    <!-- <div class="menu-toggle" onclick="toggleMenu()">
-      <i class="fa-solid fa-bars"></i>
-    </div> -->
     <nav>
       <ul>
         <li><a href="#" onclick="toggle('login')">Login</a></li>
@@ -27,15 +24,6 @@
       </ul>
     </nav>
   </header>
-
-  <!-- Side Menu -->
-  <!-- <div id="sideMenu" class="side-menu">
-    <span class="close-btn" onclick="toggleMenu()">&times;</span>
-    <ul>
-      <li><a href="#" onclick="toggle('login'); toggleMenu()">Login</a></li>
-      <li><a href="#" onclick="toggle('signup'); toggleMenu()">Sign Up</a></li>
-    </ul>
-  </div> -->
 
   <!-- Main Container -->
   <div id="container" class="container">
@@ -59,7 +47,7 @@
     </div>
 
     <!-- Forms Row -->
-    <div class="row">
+    <div class="row forms-row">
       <!-- Sign Up Form -->
       <div class="col align-items-center flex-col sign-up">
         <div class="form-wrapper align-items-center">
@@ -123,11 +111,11 @@
   </div>
 
   <!-- Footer -->
-  <footer class="footer">
+  <!-- <footer class="footer">
     <div class="footer-content">
       <span>&copy; 2025 MyMusic. All rights reserved.</span>
     </div>
-  </footer>
+  </footer> -->
 
   <script>
     // Improved TempDB class with better error handling
